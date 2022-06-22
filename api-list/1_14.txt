@@ -1,0 +1,51 @@
+analysis:
+  v1alpha1:
+    message.gen.json
+authentication:
+  v1alpha1:
+    istio.authentication.v1alpha1.gen.json
+envoy # TODO
+extensions:
+  v1alpha1:
+    wasm.gen.json
+mcp:
+  v1alpha1:
+    istio.mcp.v1alpha1.gen.json
+mesh:
+  v1alpha1:
+    istio.mesh.v1alpha1.gen.json
+meta:
+  v1alpha1:
+    status.gen.json
+networking:
+  v1alpha3:
+    destination_rule.gen.json
+    envoy_filter.gen.json
+    gateway.gen.json
+    service_entry.gen.json
+    sidecar.gen.json
+    virtual_service.gen.json
+    workload_entry.gen.json
+    workload_group.gen.json
+  v1beta1:
+    destination_rule.gen.json
+    gateway.gen.json
+    proxy_config.gen.json
+    service_entry.gen.json
+    sidecar.gen.json
+    virtual_service.gen.json
+    workload_entry.gen.json
+    workload_group.gen.json
+operator # TODO
+security:
+  v1alpha1:
+    ca.gen.json
+  v1beta1:
+    authorization_policy.gen.json
+    jwt.gen.json
+    peer_authentication.gen.json
+    request_authentication.gen.json
+telemetry # TODO
+type:
+  v1beta1:
+    selector.gen.json
