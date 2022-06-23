@@ -1,7 +1,5 @@
 pub mod port;
 pub mod server;
-pub mod tls_mode;
-pub mod tls_protocol;
 pub mod tls_settings;
 
 use kube::CustomResource;

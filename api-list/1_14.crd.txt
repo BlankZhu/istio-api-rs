@@ -1,0 +1,30 @@
+extensions:
+  v1alpha1:
+    WasmPlugin
+networking:
+  v1alpha3:
+    DestinationRule
+    EnvoyFilter
+    Gateway
+    ServiceEntry
+    Sidecar
+    VirtualService
+    WorkloadEntry
+    WorkloadGroup
+  v1beta1:
+    DestinationRule
+    Gateway
+    ProxyConfig
+    ServiceEntry
+    Sidecar
+    VirtualService
+    WorkloadEntry
+    WorkloadGroup
+security:
+  v1beta1:
+    AuthorizationPolicy
+    PeerAuthentication
+    RequestAuthentication
+telemetry
+  v1alpha1:
+    Telemetry

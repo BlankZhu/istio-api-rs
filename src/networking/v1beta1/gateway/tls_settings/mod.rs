@@ -1,3 +1,6 @@
+pub mod tls_mode;
+pub mod tls_protocol;
+
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -17,7 +20,7 @@ pub struct TlsSettings {
     #[serde(rename = "httpsRedirect", skip_serializing_if = "Option::is_none")]
     pub https_redirect: Option<bool>,
     #[serde(rename = "mode", skip_serializing_if = "Option::is_none")]
-    pub mode: Option<super::tls_mode::TlsMode>,
+    pub mode: Option<tls_mode::TlsMode>,
     /// REQUIRED if mode is `SIMPLE` or `MUTUAL`. The path to the file holding the server-side TLS certificate to use.
     #[serde(rename = "serverCertificate", skip_serializing_if = "Option::is_none")]
     pub server_certificate: Option<String>,
@@ -46,9 +49,9 @@ pub struct TlsSettings {
     )]
     pub verify_certificate_hash: Option<Vec<String>>,
     #[serde(rename = "minProtocolVersion", skip_serializing_if = "Option::is_none")]
-    pub min_protocol_version: Option<super::tls_protocol::TlsProtocol>,
+    pub min_protocol_version: Option<tls_protocol::TlsProtocol>,
     #[serde(rename = "maxProtocolVersion", skip_serializing_if = "Option::is_none")]
-    pub max_protocol_version: Option<super::tls_protocol::TlsProtocol>,
+    pub max_protocol_version: Option<tls_protocol::TlsProtocol>,
     /// Optional: If specified, only support the specified cipher list. Otherwise default to the default cipher list supported by Envoy.
     #[serde(rename = "cipherSuites", skip_serializing_if = "Option::is_none")]
     pub cipher_suites: Option<Vec<String>>,
