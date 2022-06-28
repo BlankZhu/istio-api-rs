@@ -34,17 +34,17 @@ async fn main() -> anyhow::Result<()> {
     let client = Client::new(service, kube_config.default_namespace);
     let list_opt = ListParams::default();
 
-    let gws: Api<Gateway> = Api::namespaced(client.clone(), "ng-app");
+    let gws: Api<Gateway> = Api::namespaced(client.clone(), "my-ns");
     for gw in gws.list(&list_opt).await? {
         println!("Found Gateway: {}", gw.name());
     }
 
-    let drs: Api<DestinationRule> = Api::namespaced(client.clone(), "ng-app");
+    let drs: Api<DestinationRule> = Api::namespaced(client.clone(), "my-ns");
     for dr in drs.list(&list_opt).await? {
         println!("Found Destination Rule: {}", dr.name());
     }
 
-    let vss: Api<VirtualService> = Api::namespaced(client.clone(), "ng-app");
+    let vss: Api<VirtualService> = Api::namespaced(client.clone(), "my-ns");
     for vs in vss.list(&list_opt).await? {
         let content = serde_yaml::to_string(&vs).unwrap();
         println!("Found Virtual Service with YAML content: {}", content);
