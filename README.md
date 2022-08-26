@@ -54,8 +54,21 @@ async fn main() -> anyhow::Result<()> {
 }
 ```
 
+And in `cargo.toml`, you should specify the API version for both `k8s` & `istio` like:
+
+```toml
+[dependencies]
+# ...
+kube = { version = "0.74", features = ["runtime", "derive"] }
+k8s-openapi = { version = "0.15", features = ["v1_18"] }
+istio-api-rs = { path = "../../../istio-api/istio-api-rs/", version = "0.1.0", features = ["v1_11"] }
+# ...
+```
+
 ## Other
 
-`istio-api-rs` is currently developed and tested on istio v1.14, more istio version will be supported in the future.
+`istio-api-rs` is currently developed and tested on istio/api since v1.10, the lower api version is out of this repository's concern.
+
+The repository is using [`istio-openapi-to-rs`](https://github.com/BlankZhu/istio-openapi-to-rs) as code generator, go check that repository if you want to know more about how the codes are generated.
 
 A publish on [crates.io](https://crates.io) is on schedule.
