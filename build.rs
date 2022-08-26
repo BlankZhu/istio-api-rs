@@ -5,22 +5,21 @@ use std::path;
 
 const SRC: &str = "src";
 
-#[cfg(feature = "v1_10")]
-const FEATURE: &str = "v1_10";
-
-#[cfg(feature = "v1_11")]
-const FEATURE: &str = "v1_11";
-
-#[cfg(feature = "v1_12")]
-const FEATURE: &str = "v1_12";
-
-#[cfg(feature = "v1_13")]
-const FEATURE: &str = "v1_13";
-
-#[cfg(feature = "v1_14")]
-const FEATURE: &str = "v1_14";
-
 fn main() -> std::io::Result<()> {
+    let api_version = if cfg!(v1_10) {
+        "v1_10"
+    } else if cfg!(v1_11) {
+        "v1_11"
+    } else if cfg!(v1_12) {
+        "v1_12"
+    } else if cfg!(v1_13) {
+        "v1_13"
+    } else if cfg!(v1_14) {
+        "v1_14"
+    } else {
+        "v1_10"
+    };
+
     // get current working directory
     let current_dir = match env::current_dir() {
         Ok(cd) => cd,
@@ -39,10 +38,10 @@ fn main() -> std::io::Result<()> {
     }
 
     // make up path to versioned directory
-    let versioned_dir = path::Path::new(FEATURE);
+    let versioned_dir = path::Path::new(api_version);
     let paths = match fs::read_dir(versioned_dir) {
         Ok(ps) => ps,
-        Err(e) => panic!("failed to read directory {}, detail: {}", FEATURE, e),
+        Err(e) => panic!("failed to read directory {}, detail: {}", api_version, e),
     };
 
     // make up symbolic links
