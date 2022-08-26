@@ -12,8 +12,6 @@ pub mod load_balancer_settings_consistent_hash_lb_one_of;
 pub use self::load_balancer_settings_consistent_hash_lb_one_of::LoadBalancerSettingsConsistentHashLbOneOf;
 pub mod load_balancer_settings_one_of;
 pub use self::load_balancer_settings_one_of::LoadBalancerSettingsOneOf;
-pub mod traffic_policy_tunnel_settings;
-pub use self::traffic_policy_tunnel_settings::TrafficPolicyTunnelSettings;
 pub mod load_balancer_settings_consistent_hash_lb;
 pub use self::load_balancer_settings_consistent_hash_lb::LoadBalancerSettingsConsistentHashLb;
 pub mod locality_load_balancer_setting;

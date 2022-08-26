@@ -40,7 +40,7 @@ pub struct HttpRoute {
     pub fault: Option<Box<super::HttpFaultInjection>>,
     #[serde(rename = "mirror", skip_serializing_if = "Option::is_none")]
     pub mirror: Option<Box<super::Destination>>,
-    /// Percentage of the traffic to be mirrored by the `mirror` field. Use of integer `mirror_percent` value is deprecated. Use the double `mirror_percentage` field instead $hide_from_docs
+    /// Percentage of the traffic to be mirrored by the `mirror` field. Use of integer `mirror_percent` value is deprecated. Use the double `mirror_percentage` field instead
     #[serde(rename = "mirrorPercent", skip_serializing_if = "Option::is_none")]
     pub mirror_percent: Option<i32>,
     #[serde(rename = "mirrorPercentage", skip_serializing_if = "Option::is_none")]
