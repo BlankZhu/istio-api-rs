@@ -71,4 +71,4 @@ istio-api-rs = { version = "0.1.0", features = ["v1_11"] }
 
 The repository is using [`istio-openapi-to-rs`](https://github.com/BlankZhu/istio-openapi-to-rs) as code generator, go check that repository if you want to know more about how the codes are generated.
 
-For release package, see [crate.io](https://crates.io/crates/istio-api-rs)
+For release package, see [crate.io](https://crates.io/crates/istio-api-rs).
