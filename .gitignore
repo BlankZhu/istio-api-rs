@@ -7,3 +7,5 @@ src/*
 !src/v1_13
 !src/v1_14
 !src/lib.rs
+
+Cargo.lock
