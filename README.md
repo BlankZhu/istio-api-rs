@@ -61,7 +61,7 @@ And in `cargo.toml`, you should specify the API version for both `k8s` & `istio`
 # ...
 kube = { version = "0.74", features = ["runtime", "derive"] }
 k8s-openapi = { version = "0.15", features = ["v1_18"] }
-istio-api-rs = { path = "../../../istio-api/istio-api-rs/", version = "0.1.0", features = ["v1_11"] }
+istio-api-rs = { version = "0.1.0", features = ["v1_11"] }
 # ...
 ```
 
@@ -71,4 +71,4 @@ istio-api-rs = { path = "../../../istio-api/istio-api-rs/", version = "0.1.0", f
 
 The repository is using [`istio-openapi-to-rs`](https://github.com/BlankZhu/istio-openapi-to-rs) as code generator, go check that repository if you want to know more about how the codes are generated.
 
-A publish on [crates.io](https://crates.io) is on schedule.
+For release package, see [crate.io](https://crates.io/crates/istio-api-rs)
