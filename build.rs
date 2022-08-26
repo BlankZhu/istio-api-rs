@@ -17,6 +17,9 @@ const FEATURE: &str = "v1_12";
 #[cfg(feature = "v1_13")]
 const FEATURE: &str = "v1_13";
 
+#[cfg(feature = "v1_14")]
+const FEATURE: &str = "v1_14";
+
 fn main() -> std::io::Result<()> {
     // get current working directory
     let current_dir = match env::current_dir() {

@@ -5,4 +5,5 @@ src/*
 !src/v1_11
 !src/v1_12
 !src/v1_13
+!src/v1_14
 !src/lib.rs
