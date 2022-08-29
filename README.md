@@ -69,6 +69,6 @@ istio-api-rs = { version = "0.1.0", features = ["v1_11"] }
 
 `istio-api-rs` is currently developed and tested on istio/api since v1.10, the lower api version is out of this repository's concern.
 
-The repository is using [`istio-openapi-to-rs`](https://github.com/BlankZhu/istio-openapi-to-rs) as code generator, go check that repository if you want to know more about how the codes are generated.
+The repository is using [`istio-api-rs-codegen`](https://github.com/BlankZhu/istio-api-rs-codegen) as code generator, go check that repository if you want to know more about how the codes are generated.
 
 For release package, see [crate.io](https://crates.io/crates/istio-api-rs).
