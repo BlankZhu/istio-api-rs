@@ -1,3 +1,5 @@
 pub mod networking;
-pub mod r#type;
+pub mod operator;
 pub mod security;
+pub mod telemetry;
+pub mod r#type;

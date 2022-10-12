@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration affecting edge load balancer.
  *
@@ -16,12 +16,12 @@ use schemars::JsonSchema;
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, JsonSchema)]
 pub struct Port {
-    /// A valid non-negative integer port number.
-    #[serde(rename = "number", skip_serializing_if = "Option::is_none")]
-    pub number: Option<i32>,
     /// Label assigned to the port.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// A valid non-negative integer port number.
+    #[serde(rename = "number", skip_serializing_if = "Option::is_none")]
+    pub number: Option<i32>,
     /// The protocol exposed on the port. MUST BE one of HTTP|HTTPS|GRPC|HTTP2|MONGO|TCP|TLS. TLS implies the connection will be routed based on the SNI header to the destination without terminating the TLS connection.
     #[serde(rename = "protocol", skip_serializing_if = "Option::is_none")]
     pub protocol: Option<String>,
@@ -34,8 +34,8 @@ impl Port {
     /// Port describes the properties of a specific port of a service.
     pub fn new() -> Port {
         Port {
-            number: None,
             name: None,
+            number: None,
             protocol: None,
             target_port: None,
         }

@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Describes a collection of workload instances.
  *
@@ -15,21 +15,21 @@ use schemars::JsonSchema;
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, JsonSchema)]
 pub struct ReadinessProbe {
+    /// Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3 seconds.
+    #[serde(rename = "failureThreshold", skip_serializing_if = "Option::is_none")]
+    pub failure_threshold: Option<i32>,
     /// Number of seconds after the container has started before readiness probes are initiated.
     #[serde(rename = "initialDelaySeconds", skip_serializing_if = "Option::is_none")]
     pub initial_delay_seconds: Option<i32>,
-    /// Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1 second.
-    #[serde(rename = "timeoutSeconds", skip_serializing_if = "Option::is_none")]
-    pub timeout_seconds: Option<i32>,
     /// How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1 second.
     #[serde(rename = "periodSeconds", skip_serializing_if = "Option::is_none")]
     pub period_seconds: Option<i32>,
     /// Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1 second.
     #[serde(rename = "successThreshold", skip_serializing_if = "Option::is_none")]
     pub success_threshold: Option<i32>,
-    /// Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3 seconds.
-    #[serde(rename = "failureThreshold", skip_serializing_if = "Option::is_none")]
-    pub failure_threshold: Option<i32>,
+    /// Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1 second.
+    #[serde(rename = "timeoutSeconds", skip_serializing_if = "Option::is_none")]
+    pub timeout_seconds: Option<i32>,
     #[serde(rename = "httpGet")]
     pub http_get: Box<super::HttpHealthCheckConfig>,
     #[serde(rename = "tcpSocket")]
@@ -41,11 +41,11 @@ pub struct ReadinessProbe {
 impl ReadinessProbe {
     pub fn new(http_get: super::HttpHealthCheckConfig, tcp_socket: super::TcpHealthCheckConfig, exec: super::ExecHealthCheckConfig) -> ReadinessProbe {
         ReadinessProbe {
+            failure_threshold: None,
             initial_delay_seconds: None,
-            timeout_seconds: None,
             period_seconds: None,
             success_threshold: None,
-            failure_threshold: None,
+            timeout_seconds: None,
             http_get: Box::new(http_get),
             tcp_socket: Box::new(tcp_socket),
             exec: Box::new(exec),

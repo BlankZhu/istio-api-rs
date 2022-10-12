@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Describes a collection of workload instances.
  *
@@ -16,20 +16,20 @@ use schemars::JsonSchema;
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, JsonSchema)]
 pub struct WorkloadGroupObjectMeta {
-    /// Labels to attach
-    #[serde(rename = "labels", skip_serializing_if = "Option::is_none")]
-    pub labels: Option<::std::collections::HashMap<String, String>>,
     /// Annotations to attach
     #[serde(rename = "annotations", skip_serializing_if = "Option::is_none")]
     pub annotations: Option<::std::collections::HashMap<String, String>>,
+    /// Labels to attach
+    #[serde(rename = "labels", skip_serializing_if = "Option::is_none")]
+    pub labels: Option<::std::collections::HashMap<String, String>>,
 }
 
 impl WorkloadGroupObjectMeta {
     /// `ObjectMeta` describes metadata that will be attached to a `WorkloadEntry`. It is a subset of the supported Kubernetes metadata.
     pub fn new() -> WorkloadGroupObjectMeta {
         WorkloadGroupObjectMeta {
-            labels: None,
             annotations: None,
+            labels: None,
         }
     }
 }

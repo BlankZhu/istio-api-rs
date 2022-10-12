@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration affecting label/content routing, sni routing, etc.
  *

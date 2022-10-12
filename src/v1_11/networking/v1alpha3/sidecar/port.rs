@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration affecting network reachability of a sidecar.
  *
@@ -16,15 +16,15 @@ use schemars::JsonSchema;
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, JsonSchema)]
 pub struct Port {
+    /// Label assigned to the port.
+    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
     /// A valid non-negative integer port number.
     #[serde(rename = "number", skip_serializing_if = "Option::is_none")]
     pub number: Option<i32>,
     /// The protocol exposed on the port. MUST BE one of HTTP|HTTPS|GRPC|HTTP2|MONGO|TCP|TLS. TLS implies the connection will be routed based on the SNI header to the destination without terminating the TLS connection.
     #[serde(rename = "protocol", skip_serializing_if = "Option::is_none")]
     pub protocol: Option<String>,
-    /// Label assigned to the port.
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
     /// The port number on the endpoint where the traffic will be received. Applicable only when used with ServiceEntries.
     #[serde(rename = "targetPort", skip_serializing_if = "Option::is_none")]
     pub target_port: Option<i32>,
@@ -34,9 +34,9 @@ impl Port {
     /// Port describes the properties of a specific port of a service.
     pub fn new() -> Port {
         Port {
+            name: None,
             number: None,
             protocol: None,
-            name: None,
             target_port: None,
         }
     }

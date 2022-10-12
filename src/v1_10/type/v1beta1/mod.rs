@@ -1,1 +1,1 @@
-pub mod workload_selector;
+pub mod selector;

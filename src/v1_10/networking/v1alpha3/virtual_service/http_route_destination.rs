@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration affecting label/content routing, sni routing, etc.
  *
@@ -16,10 +16,10 @@ use schemars::JsonSchema;
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, JsonSchema)]
 pub struct HttpRouteDestination {
-    #[serde(rename = "headers", skip_serializing_if = "Option::is_none")]
-    pub headers: Option<Box<super::Headers>>,
     #[serde(rename = "destination", skip_serializing_if = "Option::is_none")]
     pub destination: Option<Box<super::Destination>>,
+    #[serde(rename = "headers", skip_serializing_if = "Option::is_none")]
+    pub headers: Option<Box<super::Headers>>,
     /// The proportion of traffic to be forwarded to the service version. (0-100). Sum of weights across destinations SHOULD BE == 100. If there is only one destination in a rule, the weight value is assumed to be 100.
     #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
     pub weight: Option<i32>,
@@ -29,8 +29,8 @@ impl HttpRouteDestination {
     /// Each routing rule is associated with one or more service versions (see glossary in beginning of document). Weights associated with the version determine the proportion of traffic it receives. For example, the following rule will route 25% of traffic for the \"reviews\" service to instances with the \"v2\" tag and the remaining traffic (i.e., 75%) to \"v1\".
     pub fn new() -> HttpRouteDestination {
         HttpRouteDestination {
-            headers: None,
             destination: None,
+            headers: None,
             weight: None,
         }
     }

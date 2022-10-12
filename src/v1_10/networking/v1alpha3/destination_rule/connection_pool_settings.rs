@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration affecting load balancing, outlier detection, etc.
  *
@@ -16,18 +16,18 @@ use schemars::JsonSchema;
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, JsonSchema)]
 pub struct ConnectionPoolSettings {
-    #[serde(rename = "tcp", skip_serializing_if = "Option::is_none")]
-    pub tcp: Option<Box<super::ConnectionPoolSettingsTcpSettings>>,
     #[serde(rename = "http", skip_serializing_if = "Option::is_none")]
     pub http: Option<Box<super::ConnectionPoolSettingsHttpSettings>>,
+    #[serde(rename = "tcp", skip_serializing_if = "Option::is_none")]
+    pub tcp: Option<Box<super::ConnectionPoolSettingsTcpSettings>>,
 }
 
 impl ConnectionPoolSettings {
     /// Connection pool settings for an upstream host. The settings apply to each individual host in the upstream service. See Envoy's [circuit breaker](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/circuit_breaking) for more details. Connection pool settings can be applied at the TCP level as well as at HTTP level.
     pub fn new() -> ConnectionPoolSettings {
         ConnectionPoolSettings {
-            tcp: None,
             http: None,
+            tcp: None,
         }
     }
 }

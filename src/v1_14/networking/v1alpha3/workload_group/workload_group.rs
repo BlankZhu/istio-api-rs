@@ -1,6 +1,6 @@
-use serde::{Deserialize, Serialize};
-use schemars::JsonSchema;
 use kube::CustomResource;
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Describes a collection of workload instances.
  *
@@ -20,10 +20,10 @@ use kube::CustomResource;
 pub struct WorkloadGroupSpec {
     #[serde(rename = "metadata", skip_serializing_if = "Option::is_none")]
     pub metadata: Option<Box<super::WorkloadGroupObjectMeta>>,
-    #[serde(rename = "template", skip_serializing_if = "Option::is_none")]
-    pub template: Option<Box<super::WorkloadEntry>>,
     #[serde(rename = "probe", skip_serializing_if = "Option::is_none")]
     pub probe: Option<Box<super::ReadinessProbe>>,
+    #[serde(rename = "template", skip_serializing_if = "Option::is_none")]
+    pub template: Option<Box<super::WorkloadEntry>>,
 }
 
 impl WorkloadGroupSpec {
@@ -31,8 +31,8 @@ impl WorkloadGroupSpec {
     pub fn new() -> WorkloadGroupSpec {
         WorkloadGroupSpec {
             metadata: None,
-            template: None,
             probe: None,
+            template: None,
         }
     }
 }

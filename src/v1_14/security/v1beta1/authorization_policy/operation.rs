@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration for access control on workloads.
  *
@@ -19,27 +19,27 @@ pub struct Operation {
     /// Optional. A list of hosts as specified in the HTTP request. The match is case-insensitive. See the [security best practices](https://istio.io/latest/docs/ops/best-practices/security/#writing-host-match-policies) for recommended usage of this field.
     #[serde(rename = "hosts", skip_serializing_if = "Option::is_none")]
     pub hosts: Option<Vec<String>>,
-    /// Optional. A list of negative match of hosts as specified in the HTTP request. The match is case-insensitive.
-    #[serde(rename = "notHosts", skip_serializing_if = "Option::is_none")]
-    pub not_hosts: Option<Vec<String>>,
-    /// Optional. A list of ports as specified in the connection.
-    #[serde(rename = "ports", skip_serializing_if = "Option::is_none")]
-    pub ports: Option<Vec<String>>,
-    /// Optional. A list of negative match of ports as specified in the connection.
-    #[serde(rename = "notPorts", skip_serializing_if = "Option::is_none")]
-    pub not_ports: Option<Vec<String>>,
     /// Optional. A list of methods as specified in the HTTP request. For gRPC service, this will always be \"POST\".
     #[serde(rename = "methods", skip_serializing_if = "Option::is_none")]
     pub methods: Option<Vec<String>>,
+    /// Optional. A list of negative match of hosts as specified in the HTTP request. The match is case-insensitive.
+    #[serde(rename = "notHosts", skip_serializing_if = "Option::is_none")]
+    pub not_hosts: Option<Vec<String>>,
     /// Optional. A list of negative match of methods as specified in the HTTP request.
     #[serde(rename = "notMethods", skip_serializing_if = "Option::is_none")]
     pub not_methods: Option<Vec<String>>,
-    /// Optional. A list of paths as specified in the HTTP request. See the [Authorization Policy Normalization](https://istio.io/latest/docs/reference/config/security/normalization/) for details of the path normalization. For gRPC service, this will be the fully-qualified name in the form of \"/package.service/method\".
-    #[serde(rename = "paths", skip_serializing_if = "Option::is_none")]
-    pub paths: Option<Vec<String>>,
     /// Optional. A list of negative match of paths.
     #[serde(rename = "notPaths", skip_serializing_if = "Option::is_none")]
     pub not_paths: Option<Vec<String>>,
+    /// Optional. A list of negative match of ports as specified in the connection.
+    #[serde(rename = "notPorts", skip_serializing_if = "Option::is_none")]
+    pub not_ports: Option<Vec<String>>,
+    /// Optional. A list of paths as specified in the HTTP request. See the [Authorization Policy Normalization](https://istio.io/latest/docs/reference/config/security/normalization/) for details of the path normalization. For gRPC service, this will be the fully-qualified name in the form of \"/package.service/method\".
+    #[serde(rename = "paths", skip_serializing_if = "Option::is_none")]
+    pub paths: Option<Vec<String>>,
+    /// Optional. A list of ports as specified in the connection.
+    #[serde(rename = "ports", skip_serializing_if = "Option::is_none")]
+    pub ports: Option<Vec<String>>,
 }
 
 impl Operation {
@@ -47,13 +47,13 @@ impl Operation {
     pub fn new() -> Operation {
         Operation {
             hosts: None,
-            not_hosts: None,
-            ports: None,
-            not_ports: None,
             methods: None,
+            not_hosts: None,
             not_methods: None,
-            paths: None,
             not_paths: None,
+            not_ports: None,
+            paths: None,
+            ports: None,
         }
     }
 }

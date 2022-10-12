@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration for access control on workloads.
  *
@@ -19,12 +19,12 @@ pub struct Condition {
     /// The name of an Istio attribute. See the [full list of supported attributes](https://istio.io/docs/reference/config/security/conditions/).
     #[serde(rename = "key", skip_serializing_if = "Option::is_none")]
     pub key: Option<String>,
-    /// Optional. A list of allowed values for the attribute. Note: at least one of values or not_values must be set.
-    #[serde(rename = "values", skip_serializing_if = "Option::is_none")]
-    pub values: Option<Vec<String>>,
     /// Optional. A list of negative match of values for the attribute. Note: at least one of values or not_values must be set.
     #[serde(rename = "notValues", skip_serializing_if = "Option::is_none")]
     pub not_values: Option<Vec<String>>,
+    /// Optional. A list of allowed values for the attribute. Note: at least one of values or not_values must be set.
+    #[serde(rename = "values", skip_serializing_if = "Option::is_none")]
+    pub values: Option<Vec<String>>,
 }
 
 impl Condition {
@@ -32,8 +32,8 @@ impl Condition {
     pub fn new() -> Condition {
         Condition {
             key: None,
-            values: None,
             not_values: None,
+            values: None,
         }
     }
 }

@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration affecting label/content routing, sni routing, etc.
  *
@@ -18,11 +18,11 @@ use schemars::JsonSchema;
 pub struct HttpRouteDestination {
     #[serde(rename = "destination", skip_serializing_if = "Option::is_none")]
     pub destination: Option<Box<super::Destination>>,
+    #[serde(rename = "headers", skip_serializing_if = "Option::is_none")]
+    pub headers: Option<Box<super::Headers>>,
     /// Weight specifies the relative proportion of traffic to be forwarded to the destination. A destination will receive `weight/(sum of all weights)` requests. If there is only one destination in a rule, it will receive all traffic. Otherwise, if weight is `0`, the destination will not receive any traffic.
     #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
     pub weight: Option<i32>,
-    #[serde(rename = "headers", skip_serializing_if = "Option::is_none")]
-    pub headers: Option<Box<super::Headers>>,
 }
 
 impl HttpRouteDestination {
@@ -30,8 +30,8 @@ impl HttpRouteDestination {
     pub fn new() -> HttpRouteDestination {
         HttpRouteDestination {
             destination: None,
-            weight: None,
             headers: None,
+            weight: None,
         }
     }
 }

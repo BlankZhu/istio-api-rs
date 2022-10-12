@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration affecting label/content routing, sni routing, etc.
  *
@@ -16,20 +16,20 @@ use schemars::JsonSchema;
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, JsonSchema)]
 pub struct TlsRoute {
-    /// The destination to which the connection should be forwarded to.
-    #[serde(rename = "route", skip_serializing_if = "Option::is_none")]
-    pub route: Option<Vec<super::RouteDestination>>,
     /// Match conditions to be satisfied for the rule to be activated. All conditions inside a single match block have AND semantics, while the list of match blocks have OR semantics. The rule is matched if any one of the match blocks succeed.
     #[serde(rename = "match", skip_serializing_if = "Option::is_none")]
     pub _match: Option<Vec<super::TlsMatchAttributes>>,
+    /// The destination to which the connection should be forwarded to.
+    #[serde(rename = "route", skip_serializing_if = "Option::is_none")]
+    pub route: Option<Vec<super::RouteDestination>>,
 }
 
 impl TlsRoute {
     /// Describes match conditions and actions for routing unterminated TLS traffic (TLS/HTTPS) The following routing rule forwards unterminated TLS traffic arriving at port 443 of gateway called \"mygateway\" to internal services in the mesh based on the SNI value.
     pub fn new() -> TlsRoute {
         TlsRoute {
-            route: None,
             _match: None,
+            route: None,
         }
     }
 }

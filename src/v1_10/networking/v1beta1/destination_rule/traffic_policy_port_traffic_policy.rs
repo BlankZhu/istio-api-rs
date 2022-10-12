@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration affecting load balancing, outlier detection, etc.
  *
@@ -16,27 +16,27 @@ use schemars::JsonSchema;
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, JsonSchema)]
 pub struct TrafficPolicyPortTrafficPolicy {
-    #[serde(rename = "loadBalancer", skip_serializing_if = "Option::is_none")]
-    pub load_balancer: Option<Box<super::LoadBalancerSettings>>,
     #[serde(rename = "connectionPool", skip_serializing_if = "Option::is_none")]
     pub connection_pool: Option<Box<super::ConnectionPoolSettings>>,
+    #[serde(rename = "loadBalancer", skip_serializing_if = "Option::is_none")]
+    pub load_balancer: Option<Box<super::LoadBalancerSettings>>,
     #[serde(rename = "outlierDetection", skip_serializing_if = "Option::is_none")]
     pub outlier_detection: Option<Box<super::OutlierDetection>>,
-    #[serde(rename = "tls", skip_serializing_if = "Option::is_none")]
-    pub tls: Option<Box<super::ClientTlsSettings>>,
     #[serde(rename = "port", skip_serializing_if = "Option::is_none")]
     pub port: Option<Box<super::PortSelector>>,
+    #[serde(rename = "tls", skip_serializing_if = "Option::is_none")]
+    pub tls: Option<Box<super::ClientTlsSettings>>,
 }
 
 impl TrafficPolicyPortTrafficPolicy {
     /// Traffic policies that apply to specific ports of the service
     pub fn new() -> TrafficPolicyPortTrafficPolicy {
         TrafficPolicyPortTrafficPolicy {
-            load_balancer: None,
             connection_pool: None,
+            load_balancer: None,
             outlier_detection: None,
-            tls: None,
             port: None,
+            tls: None,
         }
     }
 }

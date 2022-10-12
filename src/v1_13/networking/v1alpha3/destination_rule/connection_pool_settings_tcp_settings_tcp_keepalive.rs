@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration affecting load balancing, outlier detection, etc.
  *
@@ -16,24 +16,24 @@ use schemars::JsonSchema;
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, JsonSchema)]
 pub struct ConnectionPoolSettingsTcpSettingsTcpKeepalive {
+    /// The time duration between keep-alive probes. Default is to use the OS level configuration (unless overridden, Linux defaults to 75s.)
+    #[serde(rename = "interval", skip_serializing_if = "Option::is_none")]
+    pub interval: Option<String>,
     /// Maximum number of keepalive probes to send without response before deciding the connection is dead. Default is to use the OS level configuration (unless overridden, Linux defaults to 9.)
     #[serde(rename = "probes", skip_serializing_if = "Option::is_none")]
     pub probes: Option<i32>,
     /// The time duration a connection needs to be idle before keep-alive probes start being sent. Default is to use the OS level configuration (unless overridden, Linux defaults to 7200s (ie 2 hours.)
     #[serde(rename = "time", skip_serializing_if = "Option::is_none")]
     pub time: Option<String>,
-    /// The time duration between keep-alive probes. Default is to use the OS level configuration (unless overridden, Linux defaults to 75s.)
-    #[serde(rename = "interval", skip_serializing_if = "Option::is_none")]
-    pub interval: Option<String>,
 }
 
 impl ConnectionPoolSettingsTcpSettingsTcpKeepalive {
     /// TCP keepalive.
     pub fn new() -> ConnectionPoolSettingsTcpSettingsTcpKeepalive {
         ConnectionPoolSettingsTcpSettingsTcpKeepalive {
+            interval: None,
             probes: None,
             time: None,
-            interval: None,
         }
     }
 }

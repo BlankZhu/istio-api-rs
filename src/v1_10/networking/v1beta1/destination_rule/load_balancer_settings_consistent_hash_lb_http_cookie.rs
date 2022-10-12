@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 /*
  * Configuration affecting load balancing, outlier detection, etc.
  *
@@ -16,12 +16,12 @@ use schemars::JsonSchema;
 
 #[derive(Clone, Debug, PartialEq, Default, Serialize, Deserialize, JsonSchema)]
 pub struct LoadBalancerSettingsConsistentHashLbHttpCookie {
-    /// Path to set for the cookie.
-    #[serde(rename = "path", skip_serializing_if = "Option::is_none")]
-    pub path: Option<String>,
     /// Name of the cookie.
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    /// Path to set for the cookie.
+    #[serde(rename = "path", skip_serializing_if = "Option::is_none")]
+    pub path: Option<String>,
     /// Lifetime of the cookie.
     #[serde(rename = "ttl", skip_serializing_if = "Option::is_none")]
     pub ttl: Option<String>,
@@ -31,8 +31,8 @@ impl LoadBalancerSettingsConsistentHashLbHttpCookie {
     /// Describes a HTTP cookie that will be used as the hash key for the Consistent Hash load balancer. If the cookie is not present, it will be generated.
     pub fn new() -> LoadBalancerSettingsConsistentHashLbHttpCookie {
         LoadBalancerSettingsConsistentHashLbHttpCookie {
-            path: None,
             name: None,
+            path: None,
             ttl: None,
         }
     }
