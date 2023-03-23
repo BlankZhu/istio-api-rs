@@ -1,6 +1,6 @@
 [package]
 name = "istio-api-rs"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["BlankZhu"]
 edition = "2021"
 description = "A collection of CRDs for api used in Istio."
@@ -21,7 +21,7 @@ serde = "^1.0"
 serde_json = "^1.0"
 schemars = "^0.8"
 k8s-openapi = { version = "^0.17.0" }
-kube = { version = "^0.78.0", features = ["derive"] }
+kube = { version = "0.80.0", features = ["derive"] }
 
 [features]
 v1_10 = []
@@ -32,3 +32,6 @@ v1_14 = []
 v1_15 = []
 v1_16 = []
 v1_17 = []
+
+[package.metadata.docs.rs]
+features = ["v1_17"]
