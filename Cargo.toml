@@ -1,6 +1,6 @@
 [package]
 name = "istio-api-rs"
-version = "0.4.0"
+version = "0.5.0"
 authors = ["BlankZhu"]
 edition = "2021"
 description = "A collection of CRDs for api used in Istio."
