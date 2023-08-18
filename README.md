@@ -10,10 +10,10 @@ use istio_api_rs::networking::v1beta1::destination_rule::*;
 use istio_api_rs::networking::v1beta1::gateway::*;
 use istio_api_rs::networking::v1beta1::virtual_service::*;
 use kube::{
-    api::{Api, ListParams, ResourceExt},
+    api::ListParams,
     client::ConfigExt,
     config::{KubeConfigOptions, Kubeconfig},
-    Client, Config,
+    Api, Client, Config,
 };
 use tower::ServiceBuilder;
 
@@ -36,12 +36,12 @@ async fn main() -> anyhow::Result<()> {
 
     let gws: Api<Gateway> = Api::namespaced(client.clone(), "my-ns");
     for gw in gws.list(&list_opt).await? {
-        println!("Found Gateway: {}", gw.name());
+        println!("Found Gateway: {}", gw.metadata.name.unwrap());
     }
 
     let drs: Api<DestinationRule> = Api::namespaced(client.clone(), "my-ns");
     for dr in drs.list(&list_opt).await? {
-        println!("Found Destination Rule: {}", dr.name());
+        println!("Found Destination Rule: {}", dr.metadata.name.unwrap());
     }
 
     let vss: Api<VirtualService> = Api::namespaced(client.clone(), "my-ns");
@@ -59,9 +59,9 @@ And in `cargo.toml`, you should specify the API version for both `k8s` & `istio`
 ```toml
 [dependencies]
 # ...
-kube = { version = "0.74", features = ["runtime", "derive"] }
-k8s-openapi = { version = "0.15", features = ["v1_18"] }
-istio-api-rs = { version = "0.1.0", features = ["v1_11"] }
+kube = { version = "0.85", features = ["runtime", "derive"] }
+k8s-openapi = { version = "0.19", features = ["v1_24"] }
+istio-api-rs = { version = "0.5.0", features = ["v1_18"] }
 # ...
 ```
 
