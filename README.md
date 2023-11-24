@@ -23,7 +23,7 @@ async fn main() -> anyhow::Result<()> {
     let kube_config: Kubeconfig = serde_yaml::from_reader(kube_config_file)?;
     let kube_config_opt = KubeConfigOptions::default();
     let kube_config = Config::from_custom_kubeconfig(kube_config, &kube_config_opt).await?;
-    let https = kube_config.openssl_https_connector()?;
+    let https = kube_config.rustls_https_connector()?;
 
     tracing_subscriber::fmt::init();
 
@@ -59,9 +59,9 @@ And in `cargo.toml`, you should specify the API version for both `k8s` & `istio`
 ```toml
 [dependencies]
 # ...
-kube = { version = "0.85", features = ["runtime", "derive"] }
-k8s-openapi = { version = "0.19", features = ["v1_24"] }
-istio-api-rs = { version = "0.6.0", features = ["v1_19"] }
+kube = { version = "0.87", features = ["runtime", "derive"] }
+k8s-openapi = { version = "0.20", features = ["v1_24"] }
+istio-api-rs = { version = "0.7.0", features = ["v1_20"] }
 # ...
 ```
 
