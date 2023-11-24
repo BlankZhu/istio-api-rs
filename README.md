@@ -61,7 +61,7 @@ And in `cargo.toml`, you should specify the API version for both `k8s` & `istio`
 # ...
 kube = { version = "0.85", features = ["runtime", "derive"] }
 k8s-openapi = { version = "0.19", features = ["v1_24"] }
-istio-api-rs = { version = "0.6.0", features = ["v1_19"] }
+istio-api-rs = { version = "0.7.0", features = ["v1_20"] }
 # ...
 ```
 
