@@ -42,7 +42,7 @@ pub struct RequestAuthenticationJwtRules {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "jwksUri")]
     pub jwks_uri: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub jwks_uri_1: Option<String>,
+    pub jwks_uri: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "outputPayloadToHeader")]
     pub output_payload_to_header: Option<String>,
 }

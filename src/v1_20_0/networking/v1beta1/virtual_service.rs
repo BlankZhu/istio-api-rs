@@ -59,8 +59,6 @@ pub struct VirtualServiceHttp {
     /// Percentage of the traffic to be mirrored by the `mirror` field.
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "mirrorPercentage")]
     pub mirror_percentage: Option<VirtualServiceHttpMirrorPercentage>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub mirror_percent: Option<i64>,
     /// Specifies the destinations to mirror HTTP traffic in addition to the original destination.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mirrors: Option<Vec<VirtualServiceHttpMirrors>>,
