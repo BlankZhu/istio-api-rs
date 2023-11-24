@@ -28,3 +28,6 @@
 #[cfg(feature = "v1_19")] mod v1_19_0;
 #[cfg(feature = "v1_19")] pub use self::v1_19_0::*;
 
+#[cfg(feature = "v1_20")] mod v1_20_0;
+#[cfg(feature = "v1_20")] pub use self::v1_20_0::*;
+
