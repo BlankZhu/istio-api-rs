@@ -11,40 +11,27 @@ use istio_api_rs::networking::v1beta1::gateway::*;
 use istio_api_rs::networking::v1beta1::virtual_service::*;
 use kube::{
     api::ListParams,
-    client::ConfigExt,
-    config::{KubeConfigOptions, Kubeconfig},
-    Api, Client, Config,
+    Api, Client,
 };
-use tower::ServiceBuilder;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let kube_config_file = std::fs::File::open("./your/kube/config.yaml")?;
-    let kube_config: Kubeconfig = serde_yaml::from_reader(kube_config_file)?;
-    let kube_config_opt = KubeConfigOptions::default();
-    let kube_config = Config::from_custom_kubeconfig(kube_config, &kube_config_opt).await?;
-    let https = kube_config.rustls_https_connector()?;
-
     tracing_subscriber::fmt::init();
 
-    let service = ServiceBuilder::new()
-        .layer(kube_config.base_uri_layer())
-        .option_layer(kube_config.auth_layer()?)
-        .service(hyper::Client::builder().build(https));
-    let client = Client::new(service, kube_config.default_namespace);
+    let client = Client::try_default().await?;
     let list_opt = ListParams::default();
 
-    let gws: Api<Gateway> = Api::namespaced(client.clone(), "my-ns");
+    let gws: Api<Gateway> = Api::namespaced(client.clone(), "default");
     for gw in gws.list(&list_opt).await? {
         println!("Found Gateway: {}", gw.metadata.name.unwrap());
     }
 
-    let drs: Api<DestinationRule> = Api::namespaced(client.clone(), "my-ns");
+    let drs: Api<DestinationRule> = Api::namespaced(client.clone(), "default");
     for dr in drs.list(&list_opt).await? {
         println!("Found Destination Rule: {}", dr.metadata.name.unwrap());
     }
 
-    let vss: Api<VirtualService> = Api::namespaced(client.clone(), "my-ns");
+    let vss: Api<VirtualService> = Api::namespaced(client.clone(), "default");
     for vs in vss.list(&list_opt).await? {
         let content = serde_yaml::to_string(&vs).unwrap();
         println!("Found Virtual Service with YAML content: {}", content);
@@ -52,6 +39,7 @@ async fn main() -> anyhow::Result<()> {
 
     Ok(())
 }
+
 ```
 
 And in `cargo.toml`, you should specify the API version for both `k8s` & `istio` like:
@@ -59,9 +47,9 @@ And in `cargo.toml`, you should specify the API version for both `k8s` & `istio`
 ```toml
 [dependencies]
 # ...
-kube = { version = "0.87", features = ["runtime", "derive"] }
-k8s-openapi = { version = "0.20", features = ["v1_24"] }
-istio-api-rs = { version = "0.7.0", features = ["v1_20"] }
+kube = { version = "0.90.0", features = ["runtime", "derive"] }
+k8s-openapi = { version = "0.21.1", features = ["v1_29"] }
+istio-api-rs = { version = "0.8.0", features = ["v1_21"] }
 # ...
 ```
 
