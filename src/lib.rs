@@ -34,3 +34,6 @@
 #[cfg(feature = "v1_21")] mod v1_21_0;
 #[cfg(feature = "v1_21")] pub use self::v1_21_0::*;
 
+#[cfg(feature = "v1_22")] mod v1_22_0;
+#[cfg(feature = "v1_22")] pub use self::v1_22_0::*;
+
