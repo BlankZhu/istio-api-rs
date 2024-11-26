@@ -17,7 +17,7 @@ readme = "README.md"
 k8s-openapi = { version = ">=0.23.0", features = ["v1_31"] }
 
 [dependencies]
-kube = { version = ">=0.96.0", features = ["derive", "runtime"] }
+kube = { version = ">=0.96.0", features = ["derive"] }
 k8s-openapi = { version = ">=0.23.0" }
 schemars = "^0.8"
 serde = "^1.0"
