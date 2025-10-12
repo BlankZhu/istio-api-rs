@@ -59,16 +59,17 @@ And in `cargo.toml`, you should specify the API version for both `k8s` & `istio`
 ```toml
 [dependencies]
 # ...
-tokio = { version = "1", features = ["full"] }
-hyper-util = "0.1.10"
-tower = "0.5.1"
-rustls = "0.20"
-anyhow = "1"
+tokio = { version = "^1", features = ["full"] }
+hyper-util = "0.1.17"
+tower = "0.5.2"
+rustls = "0.23.32"
+anyhow = "^1"
 serde_yaml = "0.9"
-tracing-subscriber = "0.3"
-kube = { version = "0.96", features = ["runtime", "derive"] }
-k8s-openapi = { version = "0.23", features = ["v1_31"] }
-istio-api-rs = { version = "0.10.0", features = ["v1_23"] }
+tracing-subscriber = "^0.3"
+kube = { version = "2.0.1", features = ["runtime", "derive"] }
+k8s-openapi = { version = "0.26.0", features = ["v1_31", "schemars"] }
+schemars = { version = "^1.0" }
+istio-api-rs = { version = "0.12.0", features = ["v1_23"] }
 # ...
 ```
 
