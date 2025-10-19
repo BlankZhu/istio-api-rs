@@ -13,25 +13,17 @@ use istio_api_rs::networking::v1beta1::{
 };
 use kube::{
     api::ListParams,
-    client::ConfigExt,
-    Api, Client, Config,
+    Api, Client,
 };
-use hyper_util::rt::TokioExecutor;
-use tower::{BoxError, ServiceBuilder};
+use rustls::crypto::CryptoProvider;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let kube_config = Config::infer().await?;
-    let https = kube_config.rustls_https_connector()?;
-
     tracing_subscriber::fmt::init();
 
-    let service = ServiceBuilder::new()
-        .layer(kube_config.base_uri_layer())
-        .option_layer(kube_config.auth_layer()?)
-        .map_err(BoxError::from)
-        .service(hyper_util::client::legacy::Client::builder(TokioExecutor::new()).build(https));
-    let client = Client::new(service, kube_config.default_namespace);
+    CryptoProvider::install_default(rustls::crypto::ring::default_provider()).expect("failed to install default crypto provider");
+
+    let client = Client::try_default().await?;
     let list_opt = ListParams::default();
 
     let gws: Api<Gateway> = Api::namespaced(client.clone(), "default");
